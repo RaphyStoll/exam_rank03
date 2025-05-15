@@ -10,3 +10,4 @@ a.out
 *.txt
 test/*
 test.c
+train*

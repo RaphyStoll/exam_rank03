@@ -1,6 +1,18 @@
 #include "get_next_line.h"
 
 
+//1.strdup.c
+// 1.1 compter la len
+// 1.2 malloc
+// 1.3 copier
+// 1.4 return
+//2. get_next_line
+// 2.1 verifier si fd et BUFFER_SIZE est valide
+// 2.3 lire le buffer
+// 3.4 copier le buffer dans line
+// 3.5 verifier si = '\n' ou '\0' si oui break
+// 3.6 ajouter '\0' a la fin de line
+
 char *ft_strdup(char *src) {
 	char *dest;
 	int i = 0;

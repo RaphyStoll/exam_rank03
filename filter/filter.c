@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 1
 
 void	ft_strlcat(char *dst, char *src) {
 	int	i = 0;
@@ -42,38 +42,35 @@ char *read_str(void) {
 }
 
 char *search_and_replace(char *str, char *needle) {
-	int i = 0;
-	int j = 0;
-	char *result;
-	int r = 0;
+    int i = 0;
+    int r = 0;
+    int needle_len = strlen(needle);
+    char *result;
 
-	if(!str || !needle || !*needle)
-		return (NULL);
-	result = malloc(sizeof(char) * (strlen(str) + 1));
-	if (!result)
-		return (perror("Error"), NULL);
-	while (str[i]) {
-		j = 0;
-		while(needle[j] && str[i + j] == needle[j])
-			j++;
-		if (!needle[j]) {
-			while (j > 0) {
-				result[r] = '*';
-				j--;
-				r++;
-			}
-			i+= strlen(needle);
-		}
-		else {
-			result[r] = str[i];
-			i++;
-			r++;
-		}
-	}
-	result[r] = '\0';
-	free(str);
-	return (result);
+    if (!str || !needle || needle_len == 0)
+        return str;
+    result = malloc(sizeof(char) * (strlen(str) + 1));
+    if (!result) {
+        printf("Error: malloc failed\n");
+        return NULL;
+    }
+    while (str[i]) {
+        int j = 0;
+        while (j < needle_len && str[i + j] == needle[j])
+            j++;
+        if (j == needle_len) {
+            for (j = 0; j < needle_len; j++)
+                result[r++] = '*';          i += needle_len;
+        } else {
+            result[r++] = str[i++];
+        }
+    }
+    result[r] = '\0';
+    free(str);
+    
+    return result;
 }
+
 
 int main(int ac, char **av)
 {
